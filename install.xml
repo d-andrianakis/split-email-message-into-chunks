@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<modification>
+  <generator>Created by MCLSOFT OE</generator>
+  <name>MCLSOFT split mail into chunks</name>
+  <version>31.10.22</version>
+  <code>mclsoft_split_mail_into_chunks</code>
+  <author>Dimitris Andrianakis</author>
+  <link>https://www.mclsoft.gr</link>
+	
+	<file path="system/library/mail/mail.php">
+		<operation>	
+			<search><![CDATA[$message .= base64_encode($this->html) . PHP_EOL;]]></search>
+			<add position="replace"><![CDATA[
+	$message .= chunk_split(base64_encode($this->html)) . PHP_EOL;
+			]]></add>
+		</operation>
+	  	<!--operation>	
+			<search><![CDATA[$header .= 'From: =?UTF-8?B?' . base64_encode($this->sender) . '?= <' . $this->from . '>' . PHP_EOL;]]></search>
+			<add position="replace"><![CDATA[
+	$header .= 'From: =?UTF-8?B?' . chunk_split(base64_encode($this->sender)) . '?= <' . $this->from . '>' . PHP_EOL;
+			]]></add>
+		</operation>
+	  	<operation>	
+			<search><![CDATA[$header .= 'Reply-To: =?UTF-8?B?' . base64_encode($this->sender) . '?= <' . $this->from . '>' . PHP_EOL;]]></search>
+			<add position="replace"><![CDATA[
+	$header .= 'Reply-To: =?UTF-8?B?' . chunk_split(base64_encode($this->sender)) . '?= <' . $this->from . '>' . PHP_EOL;
+			]]></add>
+		</operation>
+	  	<operation>	
+			<search><![CDATA[$header .= 'Reply-To: =?UTF-8?B?' . base64_encode($this->reply_to) . '?= <' . $this->reply_to . '>' . PHP_EOL;]]></search>
+			<add position="replace"><![CDATA[
+	$header .= 'Reply-To: =?UTF-8?B?' . chunk_split(base64_encode($this->reply_to)) . '?= <' . $this->reply_to . '>' . PHP_EOL;
+			]]></add>
+		</operation>
+	  	<operation>	
+			<search><![CDATA[$message .= base64_encode($this->text) . PHP_EOL;]]></search>
+			<add position="replace"><![CDATA[
+	$message .= chunk_split(base64_encode($this->text)) . PHP_EOL;
+			]]></add>
+		</operation>
+	  	<operation>	
+			<search><![CDATA[mail($to, '=?UTF-8?B?' . base64_encode($this->subject) . '?=', $message, $header, $this->parameter);]]></search>
+			<add position="replace"><![CDATA[
+	mail($to, '=?UTF-8?B?' . chunk_split(base64_encode($this->subject)) . '?=', $message, $header, $this->parameter);
+			]]></add>
+		</operation>
+	  	<operation>	
+			<search><![CDATA[mail($to, '=?UTF-8?B?' . base64_encode($this->subject) . '?=', $message, $header);]]></search>
+			<add position="replace"><![CDATA[
+	mail($to, '=?UTF-8?B?' . chunk_split(base64_encode($this->subject)) . '?=', $message, $header);
+			]]></add>
+		</operation-->
+	</file>
+</modification>
